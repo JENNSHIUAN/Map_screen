@@ -6,12 +6,18 @@ import Map from './Screen/Map';
 import Mountain_list from './Screen/Mountain_list';
 import { Provider } from 'react-redux';
 import { Store } from './Redux/store';
+import { useFonts } from 'expo-font';
 
 const Stack = createStackNavigator();
 
 
 
 function App() {
+  const [loaded] = useFonts({
+    ImprimaRegular: require('./assets/fonts/Imprima-Regular.ttf'),
+    IMFellGreatPrimerItalic: require('./assets/fonts/IMFellGreatPrimer-Italic.ttf'),
+  });
+
   return (
      <Provider store={Store}>
       <NavigationContainer>

@@ -36,8 +36,8 @@ export default function Mountain_list({navigation}){
         onPress={() => {
           navigation.navigate('Map', {
             mnt: item.Mountain,
-            lat: item.lat,
-            lng: item.lng,
+            lat: parseInt(item.lat),
+            lng: parseInt(item.lng),
         });
       }}
       
@@ -52,7 +52,6 @@ export default function Mountain_list({navigation}){
 
       )}
       keyExtractor={(item, index) => index.toString()}
-    
     
     />
     </View>
@@ -71,7 +70,7 @@ const styles = StyleSheet.create({
   item: {
     backgroundColor: '#ffffff',
     borderWidth: 2,
-    borderColor: 'cccccc',
+    borderColor: '#cccccc',
     borderRadius: 5,
     margin: 7,
     width:200,
