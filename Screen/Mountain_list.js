@@ -4,19 +4,30 @@ import { useSelector, useDispatch } from 'react-redux';
 import { getCities } from '../Redux/actions';
 
 import { 
+  Alert,
   View,
   StyleSheet,
   Text,
   FlatList,
   TouchableOpacity,
+  Linking,
   } from 'react-native';
-
 
 export default function Mountain_list({navigation}){
 
 
   const { cities } = useSelector(state => state.userReducer);
   const dispatch = useDispatch();
+  const openUrl = async (url) => {
+    const isSupported = await Linking.canOpenTRL(url);
+    if (isSupported) {
+      await Linking.openURL(url)
+    }
+    else {
+      Alert.alert('Do not  know how to open this url: ${url}');
+    }
+  }
+
 
   useEffect(() => {
         dispatch(getCities());
@@ -34,11 +45,12 @@ export default function Mountain_list({navigation}){
         
       <TouchableOpacity
         onPress={() => {
-          navigation.navigate('Map', {
-            mnt: item.Mountain,
-            lat: parseInt(item.lat),
-            lng: parseInt(item.lng),
-        });
+        //   navigation.navigate('Map', {
+        //     mnt: item.Mountain,
+        //     lat: item.lat,
+        //     lng: item.lng,
+        // });
+        Linking.openURL(`https://www.google.com/maps/search/${item.lat},${item.lng}/`)
       }}
       
       >
@@ -52,6 +64,7 @@ export default function Mountain_list({navigation}){
 
       )}
       keyExtractor={(item, index) => index.toString()}
+    
     
     />
     </View>
@@ -86,7 +99,5 @@ const styles = StyleSheet.create({
     margin: 10,
     color: '#999999',
   }
-
-
 
 });
